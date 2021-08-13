@@ -1,1 +1,4 @@
 # luizalabs-challenge
+
+yarn dev
+
