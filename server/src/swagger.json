@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Luizalabs Challenge Documentation",
+        "description": "This is an API Friend",
+        "version": "1.0.0",
+        "contact": {
+            "email": "vahnkoch@gmail.com"
+        }
+    },
+    "paths": {
+        "/peoples": {
+            "post": {
+                "tags": ["People"],
+                "summary": "Create people",
+                "description": "Create new people",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "friends": {
+                                        "type": "array"
+                                    }
+                                },
+                                "example": {
+                                    "name": "people name sample",
+                                    "friends": [] 
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created0"
+                    },
+                    "500": {
+                        "description": "People already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["People"],
+                "summary": "List all peoples",
+                "description": "List all peoples",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "friends": {
+                                                "type": "array"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
