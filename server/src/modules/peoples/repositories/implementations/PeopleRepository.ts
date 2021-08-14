@@ -1,42 +1,34 @@
 
-import { People } from "../../model/People";
+import { getRepository, Repository } from "typeorm";
+import { People } from "../../entities/People";
 import {
   IPeopleRepository,
   ICreatePeopleDTO,
 } from "../IPeopleRepository";
 
 class PeopleRepository implements IPeopleRepository {
-    private static instance: PeopleRepository;
+    private repository: Repository<People>;
 
-    peoples: People[] = [];
-
-    static getInstance(): PeopleRepository {
-        if (!PeopleRepository.instance) {
-            PeopleRepository.instance = new PeopleRepository();
-        }
-    
-        return PeopleRepository.instance;
+    constructor() {
+        this.repository = getRepository(People);
     }
 
-    getByName(name: string): People {
-        const people = this.peoples.find((people) => people.name === name);
+    async getByName(name: string): Promise<People> {
+        const people = await this.repository.findOne({ name }) 
         return people;
     }
 
-    list(): People[] {
-        const all = this.peoples;
-        return all;
+    async list(): Promise<People[]> {
+        const peoples = await this.repository.find();
+        return peoples
     }
 
-    create({ name, friends }: ICreatePeopleDTO): void {
-        const people = new People();
-
-        Object.assign(people, {
+    async create({ name, friends }: ICreatePeopleDTO): Promise<void> {
+        const people = this.repository.create({
             name,
-            friends,
-        });
-
-        this.peoples.push(people);
+            friends
+        })
+        await this.repository.save(people);
     }
 }
 

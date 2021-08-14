@@ -1,4 +1,4 @@
-import { People } from '../../model/People';
+import { People } from '../../entities/People';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 
 class ListPeopleUseCase {

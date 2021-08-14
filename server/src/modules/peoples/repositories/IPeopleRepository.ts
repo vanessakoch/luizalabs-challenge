@@ -1,10 +1,10 @@
 import { ICreatePeopleDTO } from '../dtos/ICreatePeopleDTO';
-import { People } from '../model/People';
+import { People } from '../entities/People';
 
 interface IPeopleRepository {
-    create({ name, friends }: ICreatePeopleDTO): void;
-    list(): People[];
-    getByName(name: string): People;
+    create({ name, friends }: ICreatePeopleDTO): Promise<void>;
+    list(): Promise<People[]>;
+    getByName(name: string): Promise<People>;
 }
   
 export { IPeopleRepository, ICreatePeopleDTO };

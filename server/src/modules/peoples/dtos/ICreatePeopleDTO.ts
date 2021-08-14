@@ -1,8 +1,8 @@
-import { People } from "../model/People";
+import { People } from "../entities/People";
 
 interface ICreatePeopleDTO {
     name: string,
-    friends: Array<People>
+    friends: People[]
 }
 
 export { ICreatePeopleDTO };

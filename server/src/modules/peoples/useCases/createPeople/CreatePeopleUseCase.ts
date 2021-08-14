@@ -1,19 +1,21 @@
-import { People } from '../../model/People';
+import { People } from '../../entities/People';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
 	name: string;
 	friends: Array<People>;
 }
 
+@injectable()
 class CreatePeopleUseCase {
-
 	constructor(
+		@inject("PeopleRepository")
 		private peopleRepository: IPeopleRepository
 	) { }
 	
-	execute({ name, friends }: IRequest): void {
-		const peopleExists = this.peopleRepository.getByName(name);
+	async execute({ name, friends }: IRequest): Promise<void> {
+		const peopleExists = await this.peopleRepository.getByName(name);
 
 		if (peopleExists) {
 			throw new Error('People already exists!');
