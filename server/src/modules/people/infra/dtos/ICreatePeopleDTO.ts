@@ -1,4 +1,5 @@
-import { People } from "../entities/People";
+
+import { People } from "../../../../entities/People";
 
 interface ICreatePeopleDTO {
     name: string,

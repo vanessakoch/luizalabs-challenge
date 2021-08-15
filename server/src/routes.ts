@@ -2,15 +2,13 @@ import { Router } from 'express';
 
 const routes = Router();
 
-import { CreatePeopleController } from './modules/peoples/useCases/createPeople/CreatePeopleController';
-import listPeopleController from './modules/peoples/useCases/listPeople';
+import { CreatePeopleController } from './modules/people/useCases/createPeople/CreatePeopleController';
+import { ListPeopleController } from './modules/people/useCases/listPeople/ListPeopleController';
 
 const createPeopleController = new CreatePeopleController();
+const listPeopleController = new ListPeopleController();
 
-routes.post('/peoples', createPeopleController.handle);
-
-routes.get('/peoples', (request, response) => {
-    return listPeopleController().handle(request, response);
-});
+routes.post('/people', createPeopleController.handle);
+routes.get('/people', listPeopleController.handle);
 
 export { routes };

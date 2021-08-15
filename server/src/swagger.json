@@ -9,7 +9,7 @@
         }
     },
     "paths": {
-        "/peoples": {
+        "/people": {
             "post": {
                 "tags": ["People"],
                 "summary": "Create people",
@@ -46,8 +46,8 @@
             },
             "get": {
                 "tags": ["People"],
-                "summary": "List all peoples",
-                "description": "List all peoples",
+                "summary": "List all people",
+                "description": "List all people",
                 "responses": {
                     "200": {
                         "description": "Success",

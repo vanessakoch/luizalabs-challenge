@@ -1,18 +1,6 @@
 version: '3.7'
 
 services:
-  database: 
-    image: postgres
-    container_name: database
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=luiza
-      - POSTGRES_PASSWORD=labs
-      - POSTGRES_DB=vemserfeliz
-    volumes:
-      - pgdata:/data/postgres
   app:
     build: .
     container_name: server
@@ -20,10 +8,6 @@ services:
       - 3333:3333
     volumes:
       - .:/user/app
-    links:
-      - database
-    depends_on: 
-      - database
 
 volumes:
   pgdata:

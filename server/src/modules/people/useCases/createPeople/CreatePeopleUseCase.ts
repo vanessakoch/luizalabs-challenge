@@ -1,10 +1,11 @@
-import { People } from '../../entities/People';
+import { People } from '../../../../entities/People';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../shared/errors/AppError';
 
 interface IRequest {
 	name: string;
-	friends: Array<People>;
+	friends: People[];
 }
 
 @injectable()
@@ -18,7 +19,7 @@ class CreatePeopleUseCase {
 		const peopleExists = await this.peopleRepository.getByName(name);
 
 		if (peopleExists) {
-			throw new Error('People already exists!');
+			throw new AppError('People already exists!');
 		}
 
 		this.peopleRepository.create({ name, friends });
