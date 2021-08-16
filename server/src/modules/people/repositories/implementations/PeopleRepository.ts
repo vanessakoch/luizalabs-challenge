@@ -25,6 +25,13 @@ class PeopleRepository implements IPeopleRepository {
         }
         await PeopleModel.create(people)
     }
+
+    async getMyFriendsById(list: string[]): Promise<People[]> {
+        const query = await PeopleModel.find({
+            id: { $in: list }
+        })
+        return query
+    }
 }
 
 export { PeopleRepository };

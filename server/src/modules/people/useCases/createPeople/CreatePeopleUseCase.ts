@@ -21,11 +21,11 @@ class CreatePeopleUseCase {
 		if (peopleExists) {
 			throw new AppError('People already exists!', 303);
 		}
+		const listPeople = await this.peopleRepository.list();
 		/** Se estiver adicionando uma pessoa sem amigos, dará erro */
 		if (friends.length === 0) {
 			throw new AppError('Friends list is empty!');
 		}
-		const listPeople = await this.peopleRepository.list();
 		/** Percorre a lista de amigos da requisição e verifica 
 		 *  se esse amigo existe, se não existir retorna erro */
 		friends.forEach(friend => {
