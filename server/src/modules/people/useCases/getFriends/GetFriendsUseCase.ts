@@ -14,7 +14,7 @@ class GetFriendsUseCase {
 		const peopleExists = await this.peopleRepository.getPeopleByName(name);
 
         if (!peopleExists) {
-			throw new AppError('People doesnt exists!', 303);
+			throw new AppError("People doesn't exists!", 303);
 		}
 
 		const friendNameList = peopleExists.friends.map(friend => friend.name)

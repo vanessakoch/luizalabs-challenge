@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Luizalabs Challenge Documentation",
-        "description": "This is an API Friend",
+        "title": "LuizaLabs Challenge Documentation",
+        "description": "This is the documentation of a people Api as a challenge for Magalu",
         "version": "1.0.0",
         "contact": {
             "email": "vahnkoch@gmail.com"
@@ -13,7 +13,7 @@
             "post": {
                 "tags": ["People"],
                 "summary": "Create people",
-                "description": "Create new people",
+                "description": "Create a new person with a certain name and their friends",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -29,7 +29,9 @@
                                 },
                                 "example": {
                                     "name": "people name sample",
-                                    "friends": [] 
+                                    "friends": [{
+                                        "name": "Luiza"
+                                    }]
                                 }
                             }
                         }
@@ -37,17 +39,26 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Created0"
+                        "description": "Created"
+                    },
+                    "303": {
+                        "description": "People already exists"
+                    },
+                    "400": {
+                        "description": "Friends list is empty!"
+                    },
+                    "404": {
+                        "description": "You are trying to add a friend that doesn't exist"
                     },
                     "500": {
-                        "description": "People already exists"
+                        "description": "Internal server error"
                     }
                 }
             },
             "get": {
                 "tags": ["People"],
                 "summary": "List all people",
-                "description": "List all people",
+                "description": "List all people currently saved in the database",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -56,19 +67,88 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "friends": {
-                                                "type": "array"
-                                            }
-                                        }
+                                        "type": "string"
                                     }
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/people/friends": {
+            "get": {
+                "tags": ["People"],
+                "summary": "List all friends",
+                "parameters": [  
+                    {  
+                       "name":"name",
+                       "in":"query",
+                       "description":"The name of the person you want to search",
+                       "required":true,
+                       "type":"string"
+                    }
+                ],
+                "description": "List all friends of a specific person",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "303": {
+                        "description": "People doesnt exists!"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/people/suggestion": {
+            "get": {
+                "tags": ["People"],
+                "summary": "List of suggestions",
+                "parameters": [  
+                    {  
+                       "name":"name",
+                       "in":"query",
+                       "description":"The name of the person you want to search",
+                       "required": true,
+                       "type":"string"
+                    }
+                ],
+                "description": "Exposes all the people that person's friends know, but he doesn't know",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "303": {
+                        "description": "People doesn't exists!"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }
