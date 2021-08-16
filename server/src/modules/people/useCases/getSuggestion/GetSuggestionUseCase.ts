@@ -10,12 +10,12 @@ class GetSuggestionUseCase {
 		private peopleRepository: IPeopleRepository
 	) { }
 	
-	async execute(name: string): Promise<People[]> {
+	async execute(name: string): Promise<string[]> {
 		const result: People[] = []
 		const myFriendsId: string[] = []
-		const peopleRequest = await this.peopleRepository.getByName(name);
+		const peopleRequest = await this.peopleRepository.getPeopleByName(name);
         if (!peopleRequest) {
-			throw new AppError("People doesn't exists!");
+			throw new AppError("People doesn't exists!", 303);
 		}
 		// Pegar o id de todos os amigos da própria pessoa
 		peopleRequest.friends.forEach(friend => myFriendsId.push(friend.id))
@@ -26,7 +26,9 @@ class GetSuggestionUseCase {
 			const theirFriends = myFriend.friends.filter(friend => peopleRequest.name !== friend.name);
 			result.push(...this.getDiffFriends(peopleRequest.friends, theirFriends))
 		})
-		return result;
+		// Pegar somente o nome dos objetos de sugestões
+		const suggestionNameList = result.map(suggest => suggest.name)
+		return suggestionNameList;
 	}
 
 	// Remover os amigos que a própria pessoa ja tenha

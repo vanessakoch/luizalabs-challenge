@@ -10,14 +10,15 @@ class GetFriendsUseCase {
 		private peopleRepository: IPeopleRepository
 	) { }
 	
-	async execute(name: string): Promise<People> {
-		const peopleExists = await this.peopleRepository.getByName(name);
+	async execute(name: string): Promise<string[]> {
+		const peopleExists = await this.peopleRepository.getPeopleByName(name);
 
         if (!peopleExists) {
-			throw new AppError('People doesnt exists!');
+			throw new AppError('People doesnt exists!', 303);
 		}
 
-		return peopleExists;
+		const friendNameList = peopleExists.friends.map(friend => friend.name)
+		return friendNameList;
 	}
 }
 

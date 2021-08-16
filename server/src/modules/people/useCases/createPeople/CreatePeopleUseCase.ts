@@ -1,7 +1,7 @@
 import { People } from '../../../../entities/People';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
-import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
 	name: string;
@@ -16,20 +16,21 @@ class CreatePeopleUseCase {
 	) { }
 	
 	async execute({ name, friends }: IRequest): Promise<void> {
-		const peopleExists = await this.peopleRepository.getByName(name);
+		const peopleExists = await this.peopleRepository.getPeopleByName(name);
 		/** Se a pessoa já existir, não deverá adicionar */
 		if (peopleExists) {
 			throw new AppError('People already exists!', 303);
 		}
+		/** Lista de todas as pessoas */
 		const listPeople = await this.peopleRepository.list();
 		/** Se estiver adicionando uma pessoa sem amigos, dará erro */
 		if (friends.length === 0) {
 			throw new AppError('Friends list is empty!');
 		}
 		/** Percorre a lista de amigos da requisição e verifica 
-		 *  se esse amigo existe, se não existir retorna erro */
+		 *  se os amigos existem, se não existir retorna um erro */
 		friends.forEach(friend => {
-			const friendExist = listPeople.find(repository => repository.name === friend.name);
+			const friendExist = listPeople.find(people => people.name === friend.name);
 			if(!friendExist) {
 				throw new AppError(`Friend name: ${friend.name} doesn't exist!`, 404);
 			}
