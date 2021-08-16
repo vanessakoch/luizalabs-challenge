@@ -32,8 +32,10 @@ class CreatePeopleUseCase {
 		friends.forEach(friend => {
 			const friendExist = listPeople.find(people => people.name === friend.name);
 			if(!friendExist) {
-				throw new AppError(`Friend name: ${friend.name} doesn't exist!`, 404);
+				throw new AppError(`You are trying to add a friend that doesn't exist!`, 404);
 			}
+			// Salvar no banco o id do amigo junto ao nome
+			friend.id = friendExist.id
 		})
 		/** Chama a função do banco para criar nova pessoa */
 		this.peopleRepository.create({ name, friends });
