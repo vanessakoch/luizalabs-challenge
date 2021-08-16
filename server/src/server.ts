@@ -23,6 +23,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.use(routes);
 
+// Middleware para tratar erros
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if(err instanceof AppError) {
     return response.status(err.statusCode).json({

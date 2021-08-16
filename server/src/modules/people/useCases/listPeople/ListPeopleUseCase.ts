@@ -10,9 +10,10 @@ class ListPeopleUseCase {
       	private peopleRepository: IPeopleRepository
     ) { }
 
-    async execute(): Promise<People[]> {
+    async execute(): Promise<string[]> {
         const peopleList = await this.peopleRepository.list();
-        return peopleList;
+        const peopleNameList = peopleList.map(people => people.name);
+        return peopleNameList;
     }
 
 }

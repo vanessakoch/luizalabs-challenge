@@ -6,7 +6,7 @@ import { IPeopleRepository, ICreatePeopleDTO } from "../IPeopleRepository";
 class PeopleRepository implements IPeopleRepository {
 
     /** Encontrar pessoa no banco de dados através do nome */
-    async getByName(name: string): Promise<People> {
+    async getPeopleByName(name: string): Promise<People> {
         const people = await PeopleModel.findOne({ name }) 
         return people;
     }
@@ -26,9 +26,10 @@ class PeopleRepository implements IPeopleRepository {
         await PeopleModel.create(people)
     }
 
-    async getMyFriendsById(list: string[]): Promise<People[]> {
+    /** Retorna do banco todas as collections de acordo com a lista de ids */
+    async getMyFriendsById(idList: string[]): Promise<People[]> {
         const query = await PeopleModel.find({
-            id: { $in: list }
+            id: { $in: idList }
         })
         return query
     }

@@ -6,9 +6,8 @@ class ListPeopleController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const listPeopleUseCase = container.resolve(ListPeopleUseCase)
-        const peopleList = await listPeopleUseCase.execute()
-        const peopleName = peopleList.map(people => people.name);
-        return response.json(peopleName);
+        const peopleNameList = await listPeopleUseCase.execute()
+        return response.status(200).json(peopleNameList);
     }
 }
 
