@@ -91,13 +91,29 @@ A documentação da API estará disponível em http://localhost:3333/api-docs
 * [Docker](https://www.docker.com/)
 * [Swagger](https://swagger.io/)
 
-### ⌨️ Padrões do projeto e motivações
+### ⌨️ Padrões do projeto, DB e motivações
 
-    ## SOLID
-    ## SINGLETON
-    ## MONGODB
+    ## SOLID - O projeto foi desenvolvido pensando em alguns princípios de SOLID, de modo que as classes fiquem bem definidas, fornecendo um maior reaproveitamento de código e criando um isolamento das funcionalidades. Mesmo não utilizando em projetos reais atualmente, eu particularmente acho que é um princípio de POO que deixa o código mais legível, elegante e mais fácil de dar manutenção no futuro.
 
-### ✒️ Autor
+    ## SINGLETON - Utilizei o tsyringe para fazer a injeção de dependência com o objetivo de deixar o código mais limpo, concentrar as instâncias em apenas um lugar e injeta-las em todos os casos de uso da aplicação. Ou seja, aqui temos um cenário que não necessita de diversos objetos da PeopleRepository, que é onde está todos os métodos de acesso ao banco de dados e que todos os casos de uso utilizam. Do contrário, se tivesse utilizado a mesma classe repetidas vezes, poderia aumentar o consumo de memória. É um padrão que utilizo em alguns cenários atualmente, mas também, ficando claro que não são todas as classes que devem fornecer um ponto de acesso global e uma instância única.
+
+    ## MONGODB - Quando iniciei o projeto eu estava entre fazer uma tabela Pessoa com um auto relacionamento no postgreSQL e fazer um documento NoSQL. Como o objeto é simples, optei pelo MongoDB através do Atlas, nuvem onde salvam os dados e configurações. A conexão dele está direto na API e, por estar em Cloud, não é necessario outro container específico para o banco de dados no Docker.
+
+    Modelo do objeto que está sendo salvo:
+    {
+        "id": 123,
+        "name": Name sample,
+        "friends": [
+            {
+                "name": "Maria"
+            },
+            {
+                "name": "João"
+            }
+        ]
+    }
+
+### ✒️ Autora
 
 * **Vanessa Ribeiro Koch** - *Desenvolvedora FullStack* - [GitHub](https://github.com/vanessakoch)
 
