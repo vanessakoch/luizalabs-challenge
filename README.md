@@ -101,8 +101,8 @@ A documentação da API estará disponível em http://localhost:3333/api-docs
 
 * **Vanessa Ribeiro Koch** - *Desenvolvedora FullStack* - [GitHub](https://github.com/vanessakoch)
 
-### Obrigada pelo desafio 🤓
+*Obrigada pelo desafio* 🤓
 
 ---
-⌨️ com ❤️ por [Vanessa Ribeiro Koch](https://github.com/vanessakoch) 😊
+⌨️ com ❤️ por [Vanessa Ribeiro Koch](https://github.com/vanessakoch)
 
