@@ -46,9 +46,9 @@ Você precisa ter em sua máquina o Docker e o Docker Compose. Caso não tenha, 
 
 ```
 
-```
+### 🔧 Execução do projeto
 
-### 🔧 Instalação & Execução
+```
 
     Com Docker:
 
@@ -70,23 +70,26 @@ Você precisa ter em sua máquina o Docker e o Docker Compose. Caso não tenha, 
         Aplicação servindo na porta 3333.
         
 ```
-```
-
-A documentação da api estará disponível em http://localhost:3333/api-docs
 
 ## ⚙️ Executando os testes
 
-
 ```
+
+A documentação da API estará disponível em http://localhost:3333/api-docs
+
+
 ```
 
 ## 📦 Desenvolvimento 
 
-## 🛠️ Construído com
 
-* [Node.js](https://nodejs.org/en/) - Ambiente de execução Javascript server-side.
-* [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação.
-* [MongoDB](https://www.mongodb.com/pt-br/) - Banco de dados NoSQL.
+### 🛠️ Construído com
+
+* [Node.js](https://nodejs.org/en/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [MongoDB](https://www.mongodb.com/pt-br/)
+* [Docker](https://www.docker.com/)
+* [Swagger](https://swagger.io/)
 
 ### ⌨️ Padrões do projeto e motivações
 
@@ -94,11 +97,11 @@ A documentação da api estará disponível em http://localhost:3333/api-docs
     ## SINGLETON
     ## MONGODB
 
-## ✒️ Autor
+### ✒️ Autor
 
 * **Vanessa Ribeiro Koch** - *Desenvolvedora FullStack* - [GitHub](https://github.com/vanessakoch)
 
-## Obrigada pelo desafio 🤓.
+### Obrigada pelo desafio 🤓
 
 ---
 ⌨️ com ❤️ por [Vanessa Ribeiro Koch](https://github.com/vanessakoch) 😊
