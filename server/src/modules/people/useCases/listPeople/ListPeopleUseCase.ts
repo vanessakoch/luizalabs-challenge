@@ -1,4 +1,3 @@
-import { People } from '../../../../entities/People';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 import { inject, injectable } from 'tsyringe';
 
