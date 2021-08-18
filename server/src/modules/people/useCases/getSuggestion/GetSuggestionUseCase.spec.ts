@@ -120,8 +120,7 @@ describe('GetSuggestion', () => {
             // Execute and validate
             await expect(ctrl.execute('Vanessa'))
                 .rejects.toEqual(new AppError("People doesn't exists!", 303));
+                expect(peopleRepositoryMock.getPeopleByName).toBeCalledTimes(1);
         })
-
     });
-
 });

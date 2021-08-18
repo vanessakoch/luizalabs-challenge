@@ -16,7 +16,7 @@ describe('GetFriends', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        
+
         ctrl = container
             .register<IPeopleRepository>("PeopleRepository", { useValue: peopleRepositoryMock })
             .resolve(GetFriendsUseCase)
@@ -49,10 +49,10 @@ describe('GetFriends', () => {
             }
             const expected = ["Maria", "João"]
             peopleRepositoryMock.getPeopleByName.mockReturnValue(people)
-    
+
             // Execute
             const result = await ctrl.execute(people.name)
-    
+
             // Validate
             expect(result).toStrictEqual(expected)
             expect(peopleRepositoryMock.getPeopleByName).toBeCalledTimes(1)
@@ -60,13 +60,12 @@ describe('GetFriends', () => {
 
         it('should return an error if the person doesnt exist', async () => {
             // Setup
-            peopleRepositoryMock.getPeopleByName.mockReturnValue(null)            
-    
+            peopleRepositoryMock.getPeopleByName.mockReturnValue(null)
+
             // Execute and validate
             await expect(ctrl.execute('Vanessa'))
                 .rejects.toEqual(new AppError("People doesn't exists!", 303));
+            expect(peopleRepositoryMock.getPeopleByName).toBeCalledTimes(1);
         })
-
     });
-
 });
