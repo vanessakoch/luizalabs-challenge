@@ -48,16 +48,25 @@ Você precisa ter em sua máquina o Docker e o Docker Compose. Caso não tenha, 
 
 ### 🔧 Execução do projeto
 
-```
+``` 
 
     Com Docker:
 
+    Para criar a imagem:
+
         cd server
+    
+        sudo docker build .
+    
+    Para rodar o container:
 
         sudo docker-compose up -d 
         
-        Aplicação servindo na porta 3333.
+        Aplicação servindo na porta 3333
+    
+    Para ver os logs da aplicação:
 
+        sudo docker logs server -f    
 
     Sem Docker:
     
@@ -71,13 +80,19 @@ Você precisa ter em sua máquina o Docker e o Docker Compose. Caso não tenha, 
         
 ```
 
-## ⚙️ Executando os testes
+## 📦 Documentação da API 
 
 ```
+Durante a execução do serviço, a documentação estará disponível em http://localhost:3333/api-docs , feita através do Swagger.
+```
 
-A documentação da API estará disponível em http://localhost:3333/api-docs
+## ⚙️ Executando os testes
 
 
+```
+Os testes dos casos de uso foram feito com o Jest. Para rodar, basta digitar:
+
+    yarn test
 ```
 
 ## 📦 Desenvolvimento 
@@ -93,7 +108,7 @@ A documentação da API estará disponível em http://localhost:3333/api-docs
 
 ### ⌨️ Padrões do projeto, DB e motivações
 
-    ## SOLID - O projeto foi desenvolvido pensando em alguns princípios de SOLID, de modo que as classes fiquem bem definidas, fornecendo um maior reaproveitamento de código e criando um isolamento das funcionalidades. Mesmo não utilizando em projetos reais atualmente, eu particularmente acho que é um princípio de POO que deixa o código mais legível, elegante e mais fácil de dar manutenção no futuro.
+    ## SOLID - >O projeto foi desenvolvido pensando em alguns princípios de SOLID, de modo que as classes fiquem bem definidas, fornecendo um maior reaproveitamento de código e criando um isolamento das funcionalidades. Mesmo não utilizando em projetos reais atualmente, eu particularmente acho que é um princípio de POO que deixa o código mais legível, elegante e mais fácil de dar manutenção no futuro.
 
     ## SINGLETON - Utilizei o tsyringe para fazer a injeção de dependência com o objetivo de deixar o código mais limpo, concentrar as instâncias em apenas um lugar e injeta-las em todos os casos de uso da aplicação. Ou seja, aqui temos um cenário que não necessita de diversos objetos da PeopleRepository, que é onde está todos os métodos de acesso ao banco de dados e que todos os casos de uso utilizam. Do contrário, se tivesse utilizado a mesma classe repetidas vezes, poderia aumentar o consumo de memória. É um padrão que utilizo em alguns cenários atualmente, mas também, ficando claro que não são todas as classes que devem fornecer um ponto de acesso global e uma instância única.
 
