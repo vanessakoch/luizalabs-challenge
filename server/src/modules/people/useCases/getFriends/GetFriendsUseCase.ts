@@ -4,6 +4,7 @@ import { AppError } from '../../../../shared/errors/AppError';
 
 @injectable()
 class GetFriendsUseCase {
+	
 	constructor(
 		@inject("PeopleRepository")
 		private peopleRepository: IPeopleRepository

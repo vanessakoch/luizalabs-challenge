@@ -1,7 +1,7 @@
 import "reflect-metadata";
+import "express-async-errors";
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUI from 'swagger-ui-express';
-import "express-async-errors";
 
 import { routes } from './routes';
 import { AppError } from './shared/errors/AppError';

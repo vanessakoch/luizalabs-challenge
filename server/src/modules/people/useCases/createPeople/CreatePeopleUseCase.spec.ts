@@ -16,7 +16,7 @@ describe('CreatePeople', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
-        
+
         ctrl = container
             .register<IPeopleRepository>("PeopleRepository", { useValue: peopleRepositoryMock })
             .resolve(CreatePeopleUseCase)
@@ -40,52 +40,54 @@ describe('CreatePeople', () => {
                     friends: []
                 }]
             }
-            const people = { 
-                name: "Vanessa", 
-                friends: [ testFriend ] 
+            const people = {
+                name: "Vanessa",
+                friends: [testFriend]
             }
-            
+
             peopleRepositoryMock.getPeopleByName.mockReturnValue(null)
             peopleRepositoryMock.list.mockReturnValue([testFriend])
 
             // Execute
             await ctrl.execute(people)
-            
+
             // Validate
             expect(peopleRepositoryMock.getPeopleByName).toBeCalledWith(people.name);
             expect(peopleRepositoryMock.create).toBeCalledWith(people);
-            expect(peopleRepositoryMock.create).toBeCalledTimes(1)
+            expect(peopleRepositoryMock.create).toBeCalledTimes(1);
+            expect(peopleRepositoryMock.list).toBeCalledTimes(1);
         });
 
         it('should give error when adding person that already exists', async () => {
+            // Setup
             const people = {
                 name: 'Vanessa',
                 friends: []
             }
 
-            peopleRepositoryMock.getPeopleByName.mockReturnValue(people)            
-            
+            peopleRepositoryMock.getPeopleByName.mockReturnValue(people)
+
             // Execute and validate
             await expect(ctrl.execute(people))
                 .rejects.toEqual(new AppError("People already exists!", 303));
-            expect(peopleRepositoryMock.list).toBeCalledTimes(0)
-            expect(peopleRepositoryMock.create).toBeCalledTimes(0)
+            expect(peopleRepositoryMock.list).not.toBeCalled();
+            expect(peopleRepositoryMock.create).not.toBeCalled();
         })
 
         it('should give error when adding person without friends', async () => {
+            // Setup
             const people = {
                 name: 'Vanessa',
                 friends: []
             }
-            
-            peopleRepositoryMock.getPeopleByName.mockReturnValue(null)            
-            
+
+            peopleRepositoryMock.getPeopleByName.mockReturnValue(null)
+
             // Execute and validate
             await expect(ctrl.execute(people))
                 .rejects.toEqual(new AppError("Friends list is empty!", 400));
-            expect(peopleRepositoryMock.create).toBeCalledTimes(0)
+            expect(peopleRepositoryMock.getPeopleByName).toBeCalledTimes(1)
+            expect(peopleRepositoryMock.create).not.toBeCalled();
         })
-
-    });
-
+    }); 
 });

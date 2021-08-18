@@ -1,4 +1,3 @@
-
 import { People } from "../../../../entities/People";
 
 interface ICreatePeopleDTO {

@@ -10,89 +10,66 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 Você precisa ter em sua máquina o Docker e o Docker Compose. Caso não tenha, siga os passos abaixo:
 
-```
 
-### Instalação do Docker: 
+### Instalação do Docker
 
-    Windows (64 Bit)
-
-        Instalador disponível em:
+- Windows (64 Bit). Utilizar o [instalador](https://www.docker.com/products/docker-desktop)
             
-        https://www.docker.com/products/docker-desktop
-
-    Linux
+- Linux
 
         sudo apt update
         sudo apt remove docker docker-engine docker.io
         sudo apt install docker.io
 
-        Habilitar para que seu serviço seja iniciado 
+    Habilitar para que seu serviço seja iniciado 
         automaticamente com o sistema:
 
         sudo systemctl start docker
         sudo systemctl enable docker
 
-### Instalação do Docker Compose:
-
-    É necessário instalar apenas para o Linux
+    Docker Compose
         
         sudo curl -L "https://github.com/docker/compose/releases/
         download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o
         /usr/local/bin/docker-compose
 
-    Permissões:
+    Permissões
 
         sudo chmod +x /usr/local/bin/docker-compose
 
-```
 
 ### 🔧 Execução do projeto
 
-``` 
+- Com Docker
 
-    Com Docker:
+    - Criar a imagem
 
-    Para criar a imagem:
+            cd server
+            sudo docker build .
 
-        cd server
-    
-        sudo docker build .
-    
-    Para rodar o container:
+    - Rodar o container
 
-        sudo docker-compose up -d 
+            sudo docker-compose up -d
         
-        Aplicação servindo na porta 3333
-    
-    Para ver os logs da aplicação:
+    - Para ver os logs da aplicação
 
-        sudo docker logs server -f    
-
-    Sem Docker:
-    
+            sudo docker logs server -f
+- Sem Docker:
+ 
         cd server
-
-        yarn
-
-        yarn dev
-
-        Aplicação servindo na porta 3333.
+        yarn install
+        yarn dev        
         
-```
+Aplicação servindo na porta 3333
 
 ### 📋 Documentação da API 
 
-```
 Durante a execução do serviço, a documentação estará disponível em http://localhost:3333/api-docs, feita através 
 do Swagger.
-```
 
 ### ⚙️ Executando os testes
 
-
-```
-Os testes dos casos de uso foram feito com o Jest. Para rodar, basta digitar: yarn test dentro da pasta server
-```
+Os testes dos casos de uso foram feito com o Jest. Para rodar, basta digitar: `yarn test` dentro da pasta server
 
 ## 📦 Desenvolvimento 
 

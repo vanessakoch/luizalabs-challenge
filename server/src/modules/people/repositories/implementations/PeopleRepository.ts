@@ -1,4 +1,3 @@
-
 import { People } from "../../../../entities/People";
 import { PeopleModel } from "../../infra/database";
 import { IPeopleRepository, ICreatePeopleDTO } from "../IPeopleRepository";
