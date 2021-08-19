@@ -2,6 +2,7 @@ import "reflect-metadata";
 import "express-async-errors";
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUI from 'swagger-ui-express';
+import * as dotenv from "dotenv";
 
 import { routes } from './routes';
 import { AppError } from './shared/errors/AppError';
@@ -10,17 +11,16 @@ import mongoose from 'mongoose';
 
 import './shared/container';
 
+dotenv.config();
 const app = express();
 
-mongoose.connect("mongodb+srv://admin:magalu@magaludb.g6gha.mongodb.net/magaludb?retryWrites=true&w=majority", {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER!}:${process.env.DB_PASSWORD}@${process.env.DB_NAME!}.g6gha.mongodb.net/${process.env.DB_NAME!}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 app.use(express.json());
-
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
-
 app.use(routes);
 
 // Middleware para tratar erros
